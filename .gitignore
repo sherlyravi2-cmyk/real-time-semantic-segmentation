@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Model checkpoints
+*.pth
+*.pt
+
+# Jupyter files
+.ipynb_checkpoints/
+
+# macOS files
+.DS_Store
