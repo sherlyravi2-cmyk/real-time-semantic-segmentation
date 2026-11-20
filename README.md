@@ -1,184 +1,154 @@
-Real-Time Semantic Segmentation for Autonomous Driving
+# 🚗 RoadVision AI
+### Real-Time Semantic Segmentation for Autonomous Driving
 
-Project Overview
+A computer vision project that performs pixel-level semantic segmentation of road scenes using a fine-tuned **SegFormer-B0** deep learning model.
 
-This project focuses on semantic segmentation of road scenes using the SegFormer-B0 deep learning architecture. The system identifies and classifies different objects and regions in road images to support scene understanding for autonomous driving applications.
+RoadVision AI identifies and classifies objects and regions in road images into 19 semantic categories, helping interpret road environments for autonomous driving applications.
 
-The project uses a Cityscapes-related dataset and performs pixel-level classification across 19 semantic classes.
+---
 
-Problem Statement
+## 📌 Project Overview
 
-Understanding road environments is essential for autonomous driving systems. Traditional image classification methods identify objects at image level but do not provide detailed information about their locations.
+Traditional image classification identifies objects in an image but does not show their exact locations. Semantic segmentation addresses this limitation by assigning a class label to every pixel.
 
-This project addresses this challenge by implementing semantic segmentation, which assigns a class label to individual pixels in an input road image.
+This project uses a SegFormer-B0 architecture trained on a Cityscapes-related road-scene dataset to generate semantic segmentation masks and visualize the results through an interactive Streamlit application.
 
-Objectives
+## ✨ Key Features
 
-Implement semantic segmentation using SegFormer-B0.
+- Upload road-scene images in JPG or PNG format.
+- Generate pixel-level semantic segmentation predictions.
+- Visualize the original image, predicted mask, and blended overlay.
+- Identify detected semantic categories.
+- Calculate pixel counts and percentage distribution for each detected category.
+- Display an interactive visual analysis through a Streamlit dashboard.
 
-Prepare and preprocess road images and segmentation masks.
+## 🧠 Model and Methodology
 
-Classify road scenes into 19 semantic categories.
+| Component | Description |
+|---|---|
+| Architecture | SegFormer-B0 |
+| Task | Semantic Segmentation |
+| Dataset | Cityscapes-related road-scene dataset |
+| Number of classes | 19 |
+| Training | 10 epochs |
+| Loss function | Cross Entropy Loss |
+| Optimizer | AdamW |
+| Framework | PyTorch |
+| Interface | Streamlit |
 
-Train and evaluate the deep learning model.
+### Semantic Categories
 
-Develop a Streamlit-based interface to visualize segmentation predictions.
+The model classifies road-scene pixels into 19 categories:
 
-Technologies Used
+Road, Sidewalk, Building, Wall, Fence, Pole, Traffic Light, Traffic Sign, Vegetation, Terrain, Sky, Person, Rider, Car, Truck, Bus, Train, Motorcycle, and Bicycle.
 
-Technology
+## 📊 Model Performance
 
-Purpose
+The saved Epoch 10 checkpoint contains the following training metadata:
 
-Python
+| Evaluation Metric | Value |
+|---|---:|
+| Pixel Accuracy | 92.17% |
+| Mean Intersection over Union (mIoU) | 45.31% |
+| Training Epochs | 10 |
 
-Programming language
+*Note: These values are the metrics stored in the saved checkpoint. They are not individual image-upload prediction scores.*
 
-PyTorch
+## 🖥️ Application Dashboard
 
-Deep learning framework
+The Streamlit application provides an interactive interface for uploading images and exploring semantic segmentation results.
 
-SegFormer-B0
+![RoadVision AI Dashboard](dashboard.png)
 
-Semantic segmentation architecture
+## 🔍 Segmentation Results
 
-Streamlit
+The application presents three visual outputs:
 
-Web application interface
+1. Original road-scene image
+2. Predicted semantic segmentation mask
+3. Blended overlay combining the original image and predicted mask
 
-NumPy
+It also displays detected categories and their pixel distribution.
 
-Numerical operations
+![Semantic Segmentation Results](segmentation_results.png)
 
-PIL / OpenCV
+## 🛠️ Technology Stack
 
-Image processing
+- **Python** – Main programming language
+- **PyTorch** – Deep learning model development
+- **Hugging Face Transformers** – SegFormer architecture
+- **NumPy** – Numerical operations
+- **Pillow** – Image processing
+- **Streamlit** – Interactive application development
 
-Matplotlib
+## 📂 Project Structure
 
-Visualization
-
-Dataset
-
-The project uses a Cityscapes-related road-scene image and segmentation-mask dataset.
-
-Dataset preparation includes:
-
-Image and mask loading.
-
-Image preprocessing and normalization.
-
-Mapping mask colours to 19 semantic class IDs.
-
-Training and validation split.
-
-Dataset size: 2,975 image-mask samples
-Training samples: 2,380
-Validation samples: 595
-
-The dataset files are not included in this repository.
-
-Model Architecture
-
-SegFormer-B0 is used as the semantic segmentation model. It is a transformer-based architecture designed for efficient semantic segmentation.
-
-The model is trained using:
-
-Optimizer: AdamW
-
-Learning rate: 0.00005
-
-Loss function: Cross Entropy Loss
-
-Training epochs: 10
-
-Batch size: 4
-
-Ignored mask label: 255
-
-Model Evaluation Results
-
-The model was evaluated using pixel accuracy and mean Intersection over Union (mIoU).
-
-Evaluation Metric
-
-Result
-
-Pixel Accuracy
-
-91.92%
-
-Mean IoU (mIoU)
-
-44.12%
-
-Evaluated Classes
-
-19
-
-These results represent the validation output recorded after the tenth training epoch.
-
-Streamlit Application
-
-The project includes a Streamlit-based interface that allows users to upload road images and visualize the segmentation results.
-
-The application displays:
-
-Original input image.
-
-Predicted segmentation mask.
-
-Segmentation overlay.
-
-Detected semantic categories.
-
-Pixel-share percentages for the predicted categories.
-
-Repository Structure
-
+```text
 real-time-semantic-segmentation/
 │
 ├── app.py
+├── roadvision_ai_app_refined.py
 ├── evaluate_model.py
 ├── requirements.txt
-└── README.md
+├── README.md
+│
+├── dashboard.png
+└── segmentation_results.png
+```
 
-Installation and Execution
+The trained model checkpoint is maintained separately and is not included in this repository.
 
-1. Clone the repository
+## ⚙️ Running the Application Locally
 
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/sherlyravi2-cmyk/real-time-semantic-segmentation.git
-
-2. Open the project directory
-
 cd real-time-semantic-segmentation
+```
 
-3. Install dependencies
+### 2. Create and activate a virtual environment
 
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-4. Add the trained model checkpoint
+### 4. Add the trained model checkpoint
 
-The trained model checkpoint is not included in this repository. Place the checkpoint in the location expected by app.py before running the application.
+Place `image_segmentation_epoch10.pth` in the project directory, alongside the application file.
 
-5. Run the Streamlit application
+### 5. Launch the application
 
-streamlit run app.py
+```bash
+streamlit run roadvision_ai_app_refined.py
+```
 
-Future Enhancements
+Open the local URL displayed in the terminal to access the application.
 
-Improve segmentation performance across different road scenes.
+## 🎯 Project Objective
 
-Evaluate inference speed and model efficiency.
+The objective of this project is to explore transformer-based semantic segmentation for road-scene understanding and develop an interactive prototype that visualizes pixel-level predictions.
 
-Extend testing to additional road images.
+## 🚀 Future Enhancements
 
-Explore deployment with live camera input.
+- Integrate live camera input for real-time scene analysis.
+- Optimize inference speed for deployment.
+- Improve segmentation accuracy across challenging road conditions.
+- Explore deployment on edge devices.
 
-Conclusion
+## 👩‍💻 Author
 
-This project demonstrates the application of transformer-based deep learning for semantic segmentation in autonomous driving scenarios. SegFormer-B0 is used to classify road-scene images into 19 semantic categories, and a Streamlit interface provides visual access to the model's predictions.
+**Sherly R**
 
 Project: Real-Time Semantic Segmentation for Autonomous Driving
-Model: SegFormer-B0
-Dataset: Cityscapes-related road-scene dataset
+
+---
+
+*Developed as an academic computer vision project using deep learning and interactive visualization.*
